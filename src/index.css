@@ -1,0 +1,108 @@
+body {
+  margin: 0 auto;
+  background-color: #222;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* Body */
+
+
+/* Buttons */
+button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 250px;
+  margin: 5px;
+}
+#buttonVis button{
+  background-color: white;
+  color: #333;
+  font-weight: bold;
+}
+#buttonVisLog{
+  background-color: white;
+  color: #333;
+  font-weight: bold;
+}
+#link, a{
+  background-color: #636060;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 120px;
+  margin: 5px;
+}
+#linkSUB, a{
+  background-color: #636060;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 250px;
+  margin: 5px;
+}
+#linkSUBJOIN{
+  background-color: #464646;
+  color: #fff;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  width: 230px;
+  margin: 5px;
+}
+#showBTN{
+ 
+  background-color: #464646;
+  color: #fff;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  min-width: 230px;
+  max-width: 250px;
+  height: auto;
+  margin: 5px;
+ 
+}
+#showBTN span{
+  font-weight: bold;
+  color: #87CEEB;
+  font-size: 15px;
+}
+button:hover {
+  background-color: #555;
+}
+
+/* Input */
+input, select {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  width: 250px;
+  border-radius: 5px;
+}
+
+/* Add more styles as needed for other elements */
