@@ -5,6 +5,7 @@ import SetUserServer from "./pages/setUserServer";
 import JoinUserServer from "./pages/joinUserServer";
 import Connection from "./pages/check/connnection";
 import ShowData from "./pages/showData";
+import SendData from "./pages/sendData";
 // hooks
 import { BrowserRouter as Router, Routes, Switch, Route, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -35,11 +36,15 @@ function App() {
         </button><br />
         <button type="button" id="linkSUB">
           <Link to="/generate">Generate</Link>
+        </button><br />
+        <button type="button" id="linkSUB">
+          <Link to="/send">Type</Link>
         </button>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/generate" element={<SetUserServer />}/> 
           <Route path="/join" element={<JoinUserServer />}/> 
+          <Route path="/send" element={<SendData />}/>
         
         </Routes>
         
