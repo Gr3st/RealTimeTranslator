@@ -47,7 +47,7 @@ function App() {
     
       <Connection onCheckConnection={handleCheckConnection} />
   
-      {text!=""?(
+      {connected?(
             <div>
                <button type="button" id="showBTN"><span>Message: </span>{text}</button>
             </div>):""}

@@ -32,7 +32,8 @@ export default function ShowData(props) {
     return(
         <div>
             {text!=""?text:""}
-            {lang}
+            <br />
+            {<div><span>Lang</span><br />{lang}</div>}
         </div>
     );
 }

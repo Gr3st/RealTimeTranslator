@@ -8,8 +8,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 export default function SendData() {
   const [s, setS] = useState("");
   const [da, setDa] = useState("");
-  const la = "en";
   const [user] = useAuthState(auth);
+  const la = "en";
  
   useEffect(() => {
     
@@ -25,13 +25,18 @@ export default function SendData() {
   }, [s]);
   
   const send = async () => {
-    
-    const docRef = doc(firestore, 'Translator', props.idServ);
+    const userCollectionRef = collection(firestore, "users");
+    const q = query(userCollectionRef, where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+
+    const collectionRef = collection(firestore, "Translator");
+    const docRef = doc(collectionRef, querySnapshot.docs[0].data().server);
+
 
     let data = {
       text: da,
-      lang: props.lang,
-      currentUser: props.idUser
+      lang: querySnapshot.docs[0].data().lang,
+      currentUser: user.uid
     };
     try {
       await setDoc(docRef, data);
@@ -43,7 +48,7 @@ export default function SendData() {
   };
 
   return (
-    <div className="App">
+    <div>
       <input
         type="text"
         onChange={(event) => {
