@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 function JoinUserServer (){
     const [join, setJoin] = useState("");
-    const [lang, setLang] = useState("");
-    const [puser, setPuser] = useState("");
-    const [text, setText] = useState("");
+    const [error, setError] = useState(false);
+    // const [lang, setLang] = useState("");
+    // const [puser, setPuser] = useState("");
+    // const [text, setText] = useState("");
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
 
@@ -21,9 +22,9 @@ function JoinUserServer (){
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const data = docSnap.data();
-            setLang(data.lang);
-            setText(data.text);
-            setPuser(data);
+            // setLang(data.lang);
+            // setText(data.text);
+            // setPuser(data);
             const userCollectionRef = collection(firestore, "users");
             const q = query(userCollectionRef, where("uid", "==", user.uid));
             const querySnapshot = await getDocs(q);
@@ -32,11 +33,13 @@ function JoinUserServer (){
               await updateDoc(docRef, { server: join });
               navigate("/");
               window.location.reload();
+              setError(false);
             }
           } else {
             console.log("No such document!");
+            setError(true);
           }
-        } catch (error) {
+        } catch (error) { 
           console.error("Error getting document:", error);
         }
      
@@ -46,6 +49,8 @@ function JoinUserServer (){
             <input type="text" id="linkSUBJOIN" placeholder="podaj id" onChange={(event)=> setJoin
             (event.target.value)} />
             <br />
+            {error?(window.alert("No such document!")):""}
+            
             <button type="submit" onClick={handleJoin}>Join</button>
         </div>
       );
