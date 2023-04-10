@@ -69,7 +69,7 @@ export default function SendData() {
           setS(event.target.value);
         }}
       ></input>
-      <button type="submit" onClick={send}>
+      <button type="submit" id="sendBTN" onClick={send}>
         send
       </button><br />
       <button type="button" id="showText">{da!==""?da:"message..."}</button>

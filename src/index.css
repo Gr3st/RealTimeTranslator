@@ -90,6 +90,19 @@ button {
   color: #87CEEB;
   font-size: 15px;
 }
+#sendBTN{
+  background-color: white;
+  color:black;
+  font-weight:bold;
+  min-width: 50px;
+  max-width: 60px;
+  height: auto;
+  margin: 5px;
+}
+
+#sendBTN:hover{
+  background-color: rgb(208, 233, 236);
+}
 button:hover {
   background-color: #555;
 }
