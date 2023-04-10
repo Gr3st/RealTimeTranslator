@@ -53,9 +53,10 @@ function App() {
       </Router>
       <br /><br />
       <Connection onCheckConnection={handleCheckConnection} />
-      {connected?<DisconectUserServer />:""}
+      {/* {connected?:""} */}
       {connected?(
             <div>
+              <DisconectUserServer />
                <button type="button" id="showBTN"><span>Message: </span>{text}</button>
             </div>):""}
     </div>

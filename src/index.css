@@ -90,6 +90,11 @@ button {
   color: #87CEEB;
   font-size: 15px;
 }
+.justBTN {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #sendBTN{
   background-color: white;
   color:black;
