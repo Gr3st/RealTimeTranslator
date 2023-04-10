@@ -47,7 +47,7 @@ function SetUserServer (props) {
         <div>
           <br />
           {user?(<div><button type="submit" onClick={handleClick}>
-            Generate NEW SERVER
+            CREATE NEW SERVER
           </button></div>):(<div id="buttonVis"><button type="button">Zaloguj sie aby generować server</button></div>)}
             {generateNumber!=""?(<div id="buttonVis"><button type="button">{generateNumber}</button></div>):""}
         </div>

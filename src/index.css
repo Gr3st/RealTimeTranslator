@@ -1,5 +1,5 @@
 body {
-  margin: 0 auto;
+  margin: 200px auto;
   background-color: #222;
   color: #fff;
   display: flex;
@@ -117,7 +117,13 @@ input, select {
   width: 250px;
   border-radius: 5px;
 }
-
+#error{
+  color: rgb(233, 104, 104);
+  margin: 0 auto;
+  font-size: 14px;
+  width: 130px;
+  height: auto;
+}
 #showText{
  
  

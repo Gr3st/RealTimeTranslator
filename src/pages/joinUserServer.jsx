@@ -49,7 +49,7 @@ function JoinUserServer (){
             <input type="text" id="linkSUBJOIN" placeholder="podaj id" onChange={(event)=> setJoin
             (event.target.value)} />
             <br />
-            {error?(window.alert("No such document!")):""}
+            {error?(<div id="error">No such document!<br /></div>):""}
             
             <button type="submit" onClick={handleJoin}>Join</button>
         </div>
