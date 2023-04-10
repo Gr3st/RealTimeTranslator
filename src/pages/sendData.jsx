@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { useState, useEffect } from "react";
-import { getDocs, collection, doc, setDoc, query, where } from "firebase/firestore";
+import { getDocs, collection, doc, setDoc, query, where, getDoc } from "firebase/firestore";
 import { firestore } from "../firebase";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -11,9 +11,10 @@ export default function SendData() {
   const [da, setDa] = useState("");
   const [user] = useAuthState(auth);
   const [lang, setLang] = useState("");
+  const [langToTranslate, setLangToTranslate] = useState("");
 
   const navigate = useNavigate();
-  const la = "en";
+  // const la = "en";
 
   const conectionDB = async () =>{
     const userCollectionRef = collection(firestore, "users");
@@ -22,12 +23,26 @@ export default function SendData() {
     setLang(querySnapshot.docs[0].data().lang);
   };
   
+  const conectionTranslatorDB = async () => {
+    const userCollectionRef = collection(firestore, "users");
+    const q = query(userCollectionRef, where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+
+    const collectionRef = collection(firestore, "Translator");
+    const docRef = doc(collectionRef, querySnapshot.docs[0].data().server);
+    const docSnapshot = await getDoc(docRef);
+    setLangToTranslate(docSnapshot.data().lang);
+  };
 
   useEffect(() => {
     conectionDB();
-    if (s !== "" && s.length < 500 && lang!=="") {
+    conectionTranslatorDB();
+    console.log(langToTranslate);
+    console.log(lang);
+    
+    if (s !== "" && s.length < 500 && lang!=="" && langToTranslate!=="") {
       Axios.get(
-        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${lang==="en"?"pl":la}`
+        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate}`
       ).then((res) => {
         setDa(res.data.responseData.translatedText);
         console.log(s.length);
