@@ -38,7 +38,8 @@ function SetUserServer (props) {
 
         addDocumentWithID(myRandomNumber, {
           text: " ",
-          lang: querySnapshot.docs[0].data().lang
+          lang: querySnapshot.docs[0].data().lang,
+          currentUser: user.uid
         });
         setGenerateNumber(myRandomNumber);
 
