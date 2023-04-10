@@ -6,6 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function ShowData(props) {
     const [text, setText] = useState("");
+    const [lang, setLang] = useState("");
     const [user] = useAuthState(auth);
 
     const getData = async () => {
@@ -21,6 +22,7 @@ export default function ShowData(props) {
         if (docSnap.exists()) {
             const data = docSnap.data();
             setText(data.text);
+            setLang(querySnapshot.docs[0].data().lang);
             console.log(data.text);
         }
     };
@@ -30,6 +32,7 @@ export default function ShowData(props) {
     return(
         <div>
             {text!=""?text:""}
+            {lang}
         </div>
     );
 }

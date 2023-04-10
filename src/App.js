@@ -46,8 +46,7 @@ function App() {
       </Router>
     
       <Connection onCheckConnection={handleCheckConnection} />
-      {connected}
-      
+  
       {text!=""?(
             <div>
                <button type="button" id="showBTN"><span>Message: </span>{text}</button>
