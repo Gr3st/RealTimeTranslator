@@ -25,9 +25,9 @@ export default function SendData() {
 
   useEffect(() => {
     conectionDB();
-    if (s != "" && s.length < 500 && lang!="") {
+    if (s !== "" && s.length < 500 && lang!=="") {
       Axios.get(
-        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${lang=="en"?"pl":la}`
+        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${lang==="en"?"pl":la}`
       ).then((res) => {
         setDa(res.data.responseData.translatedText);
         console.log(s.length);
@@ -72,7 +72,7 @@ export default function SendData() {
       <button type="submit" onClick={send}>
         send
       </button><br />
-      <button type="button" id="showText">{da!=""?da:"message..."}</button>
+      <button type="button" id="showText">{da!==""?da:"message..."}</button>
     </div>
   );
 }
