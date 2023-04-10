@@ -37,8 +37,10 @@ export default function SendData() {
   useEffect(() => {
     conectionDB();
     conectionTranslatorDB();
-    console.log(langToTranslate);
+
     console.log(lang);
+    console.log(langToTranslate);
+    
     
     if (s !== "" && s.length < 500 && lang!=="" && langToTranslate!=="") {
       Axios.get(

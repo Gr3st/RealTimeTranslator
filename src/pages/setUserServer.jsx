@@ -4,10 +4,11 @@ import { addDoc, collection, doc, setDoc, getDocs, updateDoc, getDoc, where, que
 import React, { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 
 
 function SetUserServer (props) {
-    const [id, setIdUser] = useState(null);
+    const [lang, setLang] = useState(null);
     const [user] = useAuthState(auth);
     const [generateNumber, setGenerateNumber] = useState("");
 
@@ -30,18 +31,23 @@ function SetUserServer (props) {
     };
   
     const handleClick = async () => {
-        addDocumentWithID(myRandomNumber, {
-            text: " "
-          });
-        setGenerateNumber(myRandomNumber);
+       
         const userCollectionRef = collection(firestore, "users");
         const q = query(userCollectionRef, where("uid", "==", user.uid));
         const querySnapshot = await getDocs(q);
+
+        addDocumentWithID(myRandomNumber, {
+          text: " ",
+          lang: querySnapshot.docs[0].data().lang
+        });
+        setGenerateNumber(myRandomNumber);
+
         if (!querySnapshot.empty) {
           const docRef = doc(firestore, "users", querySnapshot.docs[0].id);
           await updateDoc(docRef, { server: myRandomNumber });
           window.location.reload();
         }
+        
         };
     return (
         <div>
