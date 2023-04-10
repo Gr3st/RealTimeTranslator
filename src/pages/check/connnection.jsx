@@ -33,7 +33,7 @@ function Connection ({ onCheckConnection }) {
     
         <button type="submit">
           {connected ? (<div>
-        You are connected to ID: {serv}</div>):("You are not connected to the server")}
+        <span class="connected">You are connected to ID: </span>{serv}</div>):(<div><span class="disconnected">You are not connected to the server</span></div>)}
         </button>
       
     </div>

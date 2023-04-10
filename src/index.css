@@ -123,7 +123,12 @@ input, select {
    
  
 }
-
+.connected{
+  color: rgb(163, 255, 163);
+}
+.disconnected{
+  color: rgb(233, 104, 104);
+}
 #setText{
   background-color: #444;
   color: #fff;
