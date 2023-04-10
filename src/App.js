@@ -6,9 +6,11 @@ import JoinUserServer from "./pages/joinUserServer";
 import Connection from "./pages/check/connnection";
 import ShowData from "./pages/showData";
 import SendData from "./pages/sendData";
+import DisconectUserServer from "./pages/disconectUserServer";
 // hooks
 import { BrowserRouter as Router, Routes, Switch, Route, Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+
 
 
 function App() {
@@ -51,7 +53,7 @@ function App() {
       </Router>
       <br /><br />
       <Connection onCheckConnection={handleCheckConnection} />
-  
+      {connected?<DisconectUserServer />:""}
       {connected?(
             <div>
                <button type="button" id="showBTN"><span>Message: </span>{text}</button>
