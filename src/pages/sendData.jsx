@@ -24,7 +24,7 @@ export default function SendData() {
 
   useEffect(() => {
     conectionDB();
-    if (s !== "" & s.length < 500) {
+    if (s != "" && s.length < 500 && lang!="") {
       Axios.get(
         `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${lang=="en"?"pl":la}`
       ).then((res) => {
@@ -54,6 +54,7 @@ export default function SendData() {
       await setDoc(docRef, data);
       console.log("Send to ID:", docRef.id);
       navigate("/");
+      window.location.reload();
     } catch (error) {
       console.error("Error adding document:", error);
     }
@@ -63,15 +64,15 @@ export default function SendData() {
   return (
     <div>
       <input
-        type="text"
+        type="text" id="setText"
         onChange={(event) => {
           setS(event.target.value);
         }}
       ></input>
       <button type="submit" onClick={send}>
         send
-      </button>
-      <h1>{da}</h1>
+      </button><br />
+      <button type="button" id="showText">{da!=""?da:"message..."}</button>
     </div>
   );
 }

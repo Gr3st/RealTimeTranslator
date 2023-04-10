@@ -105,4 +105,32 @@ input, select {
   border-radius: 5px;
 }
 
+#showText{
+ 
+ 
+  background-color: #ebebeb;
+  color: #494949;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 1px solid black;
+  min-width: 230px;
+  max-width: 250px;
+  font-weight: bold;
+  height: auto;
+  min-height: 50px;
+  margin: 5px;
+   
+ 
+}
+
+#setText{
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  margin: 5px;
+  width: 230px;
+  border-radius: 5px;
+}
 /* Add more styles as needed for other elements */

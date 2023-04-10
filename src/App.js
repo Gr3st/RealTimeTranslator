@@ -49,7 +49,7 @@ function App() {
         </Routes>
         
       </Router>
-    
+      <br /><br />
       <Connection onCheckConnection={handleCheckConnection} />
   
       {connected?(
