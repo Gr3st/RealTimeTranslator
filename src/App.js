@@ -30,20 +30,31 @@ function App() {
       
 
       <Router>
-        <button type="button" id="link">
-          <Link to="/">Login</Link>
-        </button>
-        <button type="button" id="link">
-          <Link to="/join">Join</Link>
-        </button><br />
-        <button type="button" id="linkSUB">
-          <Link to="/generate">Generate</Link>
-        </button><br />
-        <button type="button" id="linkSUB">
-          <Link to="/send">Type</Link>
-        </button>
+       
+        <div id="panel">
+         
+          <button type="button" id="linkSUB">
+            <Link to="/join">Join</Link>
+          </button>
+          <button type="button" id="linkSUB">
+            <Link to="/generate">Generate</Link>
+          </button>
+          <button type="button" id="linkSUBlast">
+            <Link to="/send">Type</Link>
+          </button>
+          <button type="button" id="linkSUBserver">
+            {/* <button type="button" id="linkSUBhome">
+              <Link to="/">Home</Link>
+            </button> */}
+            <Connection onCheckConnection={handleCheckConnection} />
+          </button>
+        
+          <button type="button" id="linkSUBlogin">
+            <Login />
+          </button>
+        </div>
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* <Route path="/" element={<Login />} /> */}
           <Route path="/generate" element={<SetUserServer />}/> 
           <Route path="/join" element={<JoinUserServer />}/> 
           <Route path="/send" element={<SendData />}/>
@@ -51,12 +62,11 @@ function App() {
         </Routes>
         
       </Router>
-      <br /><br />
-      <Connection onCheckConnection={handleCheckConnection} />
+      
       {/* {connected?:""} */}
       {connected?(
-            <div>
-              <DisconectUserServer />
+            <div id="message">
+              {/* <DisconectUserServer /> */}
                <button type="button" id="showBTN"><span>Message: </span>{text}</button>
             </div>):""}
     </div>

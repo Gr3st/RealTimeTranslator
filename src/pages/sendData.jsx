@@ -6,15 +6,28 @@ import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from "react-router-dom";
 
+import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
+
 export default function SendData() {
   const [s, setS] = useState("");
   const [da, setDa] = useState("");
   const [user] = useAuthState(auth);
   const [lang, setLang] = useState("");
   const [langToTranslate, setLangToTranslate] = useState("");
+  const {
+    transcript,
+    listening,
+    browserSupportsSpeechRecognation,
+  } = useSpeechRecognition();
+  // if(!browserSupportsSpeechRecognation){
+  //   return <span>Tour browser doesn't support Speech Recognation</span>
+  // }
+
+  const startListening = () => SpeechRecognition.startListening({ language: lang });
 
   const navigate = useNavigate();
   // const la = "en";
+ 
 
   const conectionDB = async () =>{
     const userCollectionRef = collection(firestore, "users");
@@ -33,25 +46,6 @@ export default function SendData() {
     const docSnapshot = await getDoc(docRef);
     setLangToTranslate(docSnapshot.data().lang);
   };
-
-  useEffect(() => {
-    conectionDB();
-    conectionTranslatorDB();
-
-    console.log(lang);
-    console.log(langToTranslate);
-    
-    
-    if (s !== "" && s.length < 500 && lang!=="" && langToTranslate!=="") {
-      Axios.get(
-        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate}`
-      ).then((res) => {
-        setDa(res.data.responseData.translatedText);
-        console.log(s.length);
-      });
-    }
-  }, [s]);
-  
   const send = async () => {
     
     const userCollectionRef = collection(firestore, "users");
@@ -70,28 +64,70 @@ export default function SendData() {
     try {
       await setDoc(docRef, data);
       console.log("Send to ID:", docRef.id);
-      navigate("/");
-      window.location.reload();
+      // navigate("/");
+      // window.location.reload();
     } catch (error) {
       console.error("Error adding document:", error);
     }
   
   };
+  
 
+  useEffect(() => {
+    conectionDB();
+    conectionTranslatorDB();
+
+    console.log(lang);
+    console.log(langToTranslate);
+    
+    
+    if (s !== "" && s.length < 500 && lang!=="" && langToTranslate!=="") {
+      Axios.get(
+        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate==lang?lang=="en"?"pl":"en":langToTranslate}`
+      ).then((res) => {
+        setDa(res.data.responseData.translatedText);
+        console.log(s.length);
+      });
+    }
+    send();
+  }, [s]);
+  
+
+  useEffect(() => {
+    setS(transcript);
+  }, [transcript]);
   return (
-    <div>
-      <input
+    <div id="type">
+      {/* <input
         type="text" id="setText"
         onChange={(event) => {
           setS(event.target.value);
         }}
-      ></input><br />
+      ></input><br /> */}
+   
+      
+      {/* <input
+          type="text"
+          value={transcript}
+          onChange={(event) => setS(event.target.value)}
+        />
+        
+      <br />{s} */}
+      {s!==""?s:""}
+      <br />
       <button type="button" id="showText">{da!==""?da:"message..."}</button><br />
-      <div class="justBTN">
+      
+      <div id="type-inside">
+        <button onClick={startListening}>Start</button><br />
+        <button onClick={SpeechRecognition.stopListening}>Stop</button><br />
+      </div>
+      
+      {/* <div className="justBTN">
         <button type="submit" id="sendBTN" onClick={send}>
           send
         </button>
-      </div>
+      </div> */}
+
     </div>
   );
 }
@@ -103,13 +139,18 @@ export default function SendData() {
 // import { auth } from "../firebase";
 // import { useAuthState } from 'react-firebase-hooks/auth';
 // import { useNavigate } from "react-router-dom";
+// import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 
 // export default function SendData() {
 //   const [s, setS] = useState("");
 //   const [da, setDa] = useState("");
 //   const [user] = useAuthState(auth);
 //   const [lang, setLang] = useState("");
-
+//   const {
+//         transcript,
+//         listening,
+//         browserSupportsSpeechRecognation
+//       } = useSpeechRecognition();
 //   const navigate = useNavigate();
 //   const la = "en";
 
@@ -158,15 +199,19 @@ export default function SendData() {
 //     send();
 //   }, [s]);
   
-
+//   useEffect(() => {
+//     setS(transcript);
+//   }, [transcript]);
 //   return (
 //     <div>
-//       <input
+//       {/* <input
 //         type="text" id="setText"
 //         onChange={(event) => {
 //           setS(event.target.value);
 //         }}
-//       ></input>
+//       ></input> */}
+//       <button onClick={SpeechRecognition.startListening}>Start</button><br />
+//       <button onClick={SpeechRecognition.stopListening}>Stop</button><br />
 //       <button type="submit" onClick={send}>
 //         send
 //       </button><br />

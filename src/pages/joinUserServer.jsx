@@ -45,7 +45,7 @@ function JoinUserServer (){
      
       };
       return(
-        <div>
+        <div id="panel-join">
             <input type="text" id="linkSUBJOIN" placeholder="podaj id" onChange={(event)=> setJoin
             (event.target.value)} />
             <br />

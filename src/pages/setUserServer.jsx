@@ -5,13 +5,13 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { setSelectionRange } from "@testing-library/user-event/dist/utils";
-
+import { useNavigate } from "react-router-dom";
 
 function SetUserServer (props) {
     const [lang, setLang] = useState(null);
     const [user] = useAuthState(auth);
     const [generateNumber, setGenerateNumber] = useState("");
-
+    const navigate = useNavigate();
 
     function generateRandNum() {
         const randomNumber = Math.floor(Math.random() * 1000000);
@@ -46,12 +46,13 @@ function SetUserServer (props) {
         if (!querySnapshot.empty) {
           const docRef = doc(firestore, "users", querySnapshot.docs[0].id);
           await updateDoc(docRef, { server: myRandomNumber });
+          navigate("/");
           window.location.reload();
         }
         
         };
     return (
-        <div>
+        <div id="panel-generate">
           <br />
           {user?(<div><button type="submit" onClick={handleClick}>
             CREATE NEW SERVER

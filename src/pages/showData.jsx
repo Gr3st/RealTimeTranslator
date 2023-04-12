@@ -1,42 +1,78 @@
 import { firestore } from "../firebase";
-import { addDoc, collection, doc, setDoc, getDocs, updateDoc, getDoc, query, where} from "@firebase/firestore";
-import React, { useState, useEffect } from "react";
+import { addDoc, collection, doc, setDoc, getDocs, updateDoc, getDoc, query, where, onSnapshot } from "@firebase/firestore";
+import React, { useState, useEffect, useRef } from "react";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function ShowData(props) {
     const [text, setText] = useState("");
     const [lang, setLang] = useState("");
     const [user] = useAuthState(auth);
+    const [check, setCheck] = useState(false);
+    const prevPropsState = useRef();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "pl";
+    
+
+    // const {speak} = useSpeechSynthesis();
 
     const getData = async () => {
         const userCollectionRef = collection(firestore, "users");
         const q = query(userCollectionRef, where("uid", "==", user.uid));
         const querySnapshot = await getDocs(q);
 
-        
-
         const collectionRef = collection(firestore, "Translator");
         const docRef = doc(collectionRef, querySnapshot.docs[0].data().server);
         const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            const data = docSnap.data();
-            setText(data.text);
-            setLang(querySnapshot.docs[0].data().lang);
-            console.log(data.text);
-        }
+      
+        const unsubscribe = onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if(data.currentUser == user.uid){
+                    setCheck(true);
+                } else {
+                    setCheck(false);
+                }
+                console.log(data.text);
+                setText(data.text);
+                setLang(querySnapshot.docs[0].data().lang);
+                
+            }
+                    });
+            
+                    // Unsubscribe from realtime updates when the component unmounts
+                    return unsubscribe;
     };
-    useEffect(()=>{
-        getData();
-    },[props.state]);
+    // const speak = () =>{
+    //     window.speechSynthesis.speak(utterance);
+    // };
+    useEffect(() => {
+        if (prevPropsState.current !== props.state) {
+            getData();
+            prevPropsState.current = props.state;
+        }
+    }, [props.state]);
+
+    useEffect(() => {
+        if (text !== "" && !check) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    }, [text, check]);
+
+
     return(
         <div>
-            {text!=""?text:""}
-            <br />
-            {/* {<div><span>Lang</span><br />{lang}</div>} */}
+            {check ? "Waiting for message..." : (<div>{text !== ""?text: ""}
+            <br /></div>)}
+            {/* <button type="submit" onClick={glos}>daj</button> */}
         </div>
     );
 }
+
+
 
 // import { firestore } from "../firebase";
 // import { collection, doc, getDocs, query, where, onSnapshot } from "@firebase/firestore";
