@@ -42,7 +42,7 @@ export default function Login() {
         <div>
           <button type="button" id="buttonVisLog">{auth.currentUser.email}</button>
           
-          <button onClick={handleLogout}>Log out</button>
+          <button onClick={handleLogout} id="linkSUB">Log out</button>
         </div>
       ) : (
         <div>

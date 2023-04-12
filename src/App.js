@@ -33,22 +33,24 @@ function App() {
         {/* <button type="button" id="linkSUB">
           <Link to="/">Login</Link>
         </button> */}
-        <button type="button" id="linkSUB">
-          <Link to="/join">Join</Link>
-        </button>
-        <button type="button" id="linkSUB">
-          <Link to="/generate">Generate</Link>
-        </button>
-        <button type="button" id="linkSUBlast">
-          <Link to="/send">Type</Link>
-        </button>
-        <button type="button" id="linkSUBlogin">
-          <Connection onCheckConnection={handleCheckConnection} />
-          
-        </button>
-        <button type="button" id="linkSUBlogin">
-          <Login />
-        </button>
+        <div id="panel">
+          <button type="button" id="linkSUB">
+            <Link to="/join">Join</Link>
+          </button>
+          <button type="button" id="linkSUB">
+            <Link to="/generate">Generate</Link>
+          </button>
+          <button type="button" id="linkSUBlast">
+            <Link to="/send">Type</Link>
+          </button>
+          <button type="button" id="linkSUBserver">
+            <Connection onCheckConnection={handleCheckConnection} />
+            
+          </button>
+          <button type="button" id="linkSUBlogin">
+            <Login />
+          </button>
+        </div>
         <Routes>
           {/* <Route path="/" element={<Login />} /> */}
           <Route path="/generate" element={<SetUserServer />}/> 

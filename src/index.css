@@ -35,6 +35,7 @@ button {
   width: auto;
   padding: 12px 30px 12px 30px;
   margin: 5px;
+
 }
 #buttonVis button{
   background-color: white;
@@ -46,29 +47,52 @@ button {
   color: #333;
   font-weight: bold;
 }
-#link, a{
+#buttonVisLog, #linkSUB, #linkSUBlast, #panel{
+  box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
+}
+#panel{
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  margin-top: 10px;
+  background-color: rgb(15, 15, 15);
+}
+/* #link{
+  width: 100px;
+  text-decoration: none;
+
+} */
+#linkSUB{
   background-color: #636060;
   color: #fff;
-  
   text-decoration: none;
 
 }
-#linkSUB, a{
-  background-color: #636060;
-  color: #fff;
+a{
   text-decoration: none;
-
+  color: #fff;
 }
 #linkSUBlast, a{
-  background-color: #636060;
+  
   color: #fff;
   text-decoration: none;
   margin-right: 30px;
 }
 
 #linkSUBlogin{
+  background-color: rgb(15, 15, 15);
+  color: #fff;
+  text-decoration: none;
+
+}
+#linkSUBserver{
   background-color: #222;
   color: #fff;
+  padding: 8px;
   text-decoration: none;
 
 }
@@ -129,7 +153,9 @@ button {
 button:hover {
   background-color: #555;
 }
-
+#linkSUB:hover{
+  background-color: #555;
+}
 /* Input */
 input{
   background-color: #444;

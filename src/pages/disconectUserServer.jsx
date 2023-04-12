@@ -24,7 +24,7 @@ export default function DisconectUserServer (){
       };
       return(
         <div>
-            <button type="submit" onClick={handleDisconect}>Disconect</button>
+            <button type="submit" onClick={handleDisconect} id="linkSUB">Disconect</button>
         </div>
       );
 
