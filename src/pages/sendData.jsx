@@ -64,8 +64,8 @@ export default function SendData() {
     try {
       await setDoc(docRef, data);
       console.log("Send to ID:", docRef.id);
-      navigate("/");
-      window.location.reload();
+      // navigate("/");
+      // window.location.reload();
     } catch (error) {
       console.error("Error adding document:", error);
     }
@@ -83,13 +83,13 @@ export default function SendData() {
     
     if (s !== "" && s.length < 500 && lang!=="" && langToTranslate!=="") {
       Axios.get(
-        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate}`
+        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate==lang?lang=="en"?"pl":"en":langToTranslate}`
       ).then((res) => {
         setDa(res.data.responseData.translatedText);
         console.log(s.length);
       });
     }
-  
+    send();
   }, [s]);
   
 
@@ -122,11 +122,11 @@ export default function SendData() {
         <button onClick={SpeechRecognition.stopListening}>Stop</button><br />
       </div>
       
-      <div className="justBTN">
+      {/* <div className="justBTN">
         <button type="submit" id="sendBTN" onClick={send}>
           send
         </button>
-      </div>
+      </div> */}
 
     </div>
   );
