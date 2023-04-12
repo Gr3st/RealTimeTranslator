@@ -3,6 +3,7 @@ import { addDoc, collection, doc, setDoc, getDocs, updateDoc, getDoc, query, whe
 import React, { useState, useEffect, useRef } from "react";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useSpeechSynthesis } from "react-speech-kit";
 
 export default function ShowData(props) {
     const [text, setText] = useState("");
@@ -10,6 +11,11 @@ export default function ShowData(props) {
     const [user] = useAuthState(auth);
     const [check, setCheck] = useState(false);
     const prevPropsState = useRef();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "pl";
+    
+
+    // const {speak} = useSpeechSynthesis();
 
     const getData = async () => {
         const userCollectionRef = collection(firestore, "users");
@@ -31,13 +37,16 @@ export default function ShowData(props) {
                 console.log(data.text);
                 setText(data.text);
                 setLang(querySnapshot.docs[0].data().lang);
+                
             }
                     });
             
                     // Unsubscribe from realtime updates when the component unmounts
                     return unsubscribe;
     };
-
+    // const speak = () =>{
+    //     window.speechSynthesis.speak(utterance);
+    // };
     useEffect(() => {
         if (prevPropsState.current !== props.state) {
             getData();
@@ -45,10 +54,20 @@ export default function ShowData(props) {
         }
     }, [props.state]);
 
+    useEffect(() => {
+        if (text !== "" && !check) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    }, [text, check]);
+
+
     return(
         <div>
-            {check ? "Waiting for message..." : (<div>{text !== "" ? text : ""}
+            {check ? "Waiting for message..." : (<div>{text !== ""?text: ""}
             <br /></div>)}
+            {/* <button type="submit" onClick={glos}>daj</button> */}
         </div>
     );
 }
