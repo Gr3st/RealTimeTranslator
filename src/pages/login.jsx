@@ -6,7 +6,7 @@ import { auth, provider } from "../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-export default function App() {
+export default function Login() {
   const ref = collection(firestore, "users");
   const [user] = useAuthState(auth);
   const [langRef, setLangRef] = useState("");
@@ -37,11 +37,11 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <div className="Login">
       {user ? (
         <div>
           <button type="button" id="buttonVisLog">{auth.currentUser.email}</button>
-          <br />
+          
           <button onClick={handleLogout}>Log out</button>
         </div>
       ) : (
@@ -54,7 +54,6 @@ export default function App() {
             <option value="ru">russian</option>
           </select>
           {/* <input type="text" onChange={} placeholder="Podaj swoj jezyk"></input> */}
-          <br />
           <button onClick={signInWithGoogle}>Sign In with Google</button>
         </div>
       )}

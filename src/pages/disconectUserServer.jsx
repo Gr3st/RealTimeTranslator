@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-function DisconectUserServer (){
+export default function DisconectUserServer (){
 
     const [user] = useAuthState(auth);
 
@@ -29,5 +29,3 @@ function DisconectUserServer (){
       );
 
 }
-
-export default DisconectUserServer;

@@ -30,20 +30,27 @@ function App() {
       
 
       <Router>
-        <button type="button" id="link">
+        {/* <button type="button" id="linkSUB">
           <Link to="/">Login</Link>
-        </button>
-        <button type="button" id="link">
+        </button> */}
+        <button type="button" id="linkSUB">
           <Link to="/join">Join</Link>
-        </button><br />
+        </button>
         <button type="button" id="linkSUB">
           <Link to="/generate">Generate</Link>
-        </button><br />
-        <button type="button" id="linkSUB">
+        </button>
+        <button type="button" id="linkSUBlast">
           <Link to="/send">Type</Link>
         </button>
+        <button type="button" id="linkSUBlogin">
+          <Connection onCheckConnection={handleCheckConnection} />
+          
+        </button>
+        <button type="button" id="linkSUBlogin">
+          <Login />
+        </button>
         <Routes>
-          <Route path="/" element={<Login />} />
+          {/* <Route path="/" element={<Login />} /> */}
           <Route path="/generate" element={<SetUserServer />}/> 
           <Route path="/join" element={<JoinUserServer />}/> 
           <Route path="/send" element={<SendData />}/>
@@ -51,12 +58,11 @@ function App() {
         </Routes>
         
       </Router>
-      <br /><br />
-      <Connection onCheckConnection={handleCheckConnection} />
+      
       {/* {connected?:""} */}
       {connected?(
-            <div>
-              <DisconectUserServer />
+            <div id="message">
+              {/* <DisconectUserServer /> */}
                <button type="button" id="showBTN"><span>Message: </span>{text}</button>
             </div>):""}
     </div>

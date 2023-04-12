@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import DisconectUserServer from "../disconectUserServer";
+
 function Connection ({ onCheckConnection }) {
 
   const [user] = useAuthState(auth);
@@ -35,6 +37,9 @@ function Connection ({ onCheckConnection }) {
       <button type="submit">
         {connected ? (<div>
           <span className="connected">You are connected to ID: </span>{serv}</div>):(<div><span className="disconnected">You are not connected to the server</span></div>)}
+      </button>
+      <button type="button" id="linkSUBdisconect">
+        <DisconectUserServer />
       </button>
     </div>
   );
