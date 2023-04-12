@@ -30,10 +30,9 @@ function App() {
       
 
       <Router>
-        {/* <button type="button" id="linkSUB">
-          <Link to="/">Login</Link>
-        </button> */}
+       
         <div id="panel">
+         
           <button type="button" id="linkSUB">
             <Link to="/join">Join</Link>
           </button>
@@ -44,9 +43,12 @@ function App() {
             <Link to="/send">Type</Link>
           </button>
           <button type="button" id="linkSUBserver">
+            {/* <button type="button" id="linkSUBhome">
+              <Link to="/">Home</Link>
+            </button> */}
             <Connection onCheckConnection={handleCheckConnection} />
-            
           </button>
+        
           <button type="button" id="linkSUBlogin">
             <Login />
           </button>

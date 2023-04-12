@@ -46,8 +46,9 @@ button {
   background-color: white;
   color: #333;
   font-weight: bold;
+  margin: 0;
 }
-#buttonVisLog, #linkSUB, #linkSUBlast, #panel{
+#buttonVisLog, #linkSUB, #linkSUBlast{
   box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
   -webkit-box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
@@ -60,6 +61,27 @@ button {
   border-radius: 50px;
   margin-top: 10px;
   background-color: rgb(15, 15, 15);
+  box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 5px 27px 0px rgba(0,0,0,0.75);
+}
+#panel-join, #panel-generate{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px;
+  
+}
+#type{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#type-inside{
+  display: flex;
+  flex-direction: row;
 }
 /* #link{
   width: 100px;
@@ -72,6 +94,12 @@ button {
   text-decoration: none;
 
 }
+/* #linkSUBhome{
+  background-color: #636060;
+  color: #fff;
+  text-decoration: none;
+  margin: 0;
+} */
 a{
   text-decoration: none;
   color: #fff;
@@ -112,7 +140,9 @@ a{
   text-decoration: none;
   border-radius: 5px;
   width: 230px;
+  height: 40px;
   margin: 5px;
+  border: 1px solid #ebebeb;
 }
 #showBTN{
  
@@ -141,8 +171,8 @@ a{
   background-color: white;
   color:black;
   font-weight:bold;
-  min-width: 50px;
-  max-width: 60px;
+  width:auto;
+  
   height: auto;
   margin: 5px;
 }
@@ -150,9 +180,9 @@ a{
 #sendBTN:hover{
   background-color: rgb(208, 233, 236);
 }
-button:hover {
+/* button:hover {
   background-color: #555;
-}
+} */
 #linkSUB:hover{
   background-color: #555;
 }
@@ -184,19 +214,17 @@ select {
 }
 #showText{
  
- 
-  background-color: #ebebeb;
-  color: #494949;
+  /* background-color: #ebebeb; */
+  border: 1px solid #ebebeb;
+  color: #ebebeb;
   padding: 10px;
   text-decoration: none;
   border-radius: 5px;
-  border: 1px solid black;
-  min-width: 230px;
-  max-width: 250px;
+  width: 80%;
   font-weight: bold;
-  height: auto;
-  min-height: 50px;
-  margin: 5px;
+  height: 50vh;
+  
+  margin: 50px 0 0 0;
    
  
 }

@@ -3,7 +3,7 @@ import { collection, getDocs, query, where } from "@firebase/firestore";
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { useAuthState } from 'react-firebase-hooks/auth';
-
+import { Link } from "react-router-dom";
 import DisconectUserServer from "../disconectUserServer";
 
 function Connection ({ onCheckConnection }) {
@@ -34,6 +34,9 @@ function Connection ({ onCheckConnection }) {
 
   return (
     <div>
+      <button type="submit" id="linkSUB">
+        <Link to="/">Home</Link>
+      </button>
       <button type="submit" id="linkSUB">
         {connected ? (<div>
           <span className="connected">You are connected to ID: </span>{serv}</div>):(<div><span className="disconnected">You are not connected to the server</span></div>)}

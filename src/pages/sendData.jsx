@@ -97,15 +97,14 @@ export default function SendData() {
     setS(transcript);
   }, [transcript]);
   return (
-    <div>
+    <div id="type">
       {/* <input
         type="text" id="setText"
         onChange={(event) => {
           setS(event.target.value);
         }}
       ></input><br /> */}
-      <button onClick={startListening}>Start</button><br />
-      <button onClick={SpeechRecognition.stopListening}>Stop</button><br />
+   
       
       {/* <input
           type="text"
@@ -117,11 +116,18 @@ export default function SendData() {
       {s!==""?s:""}
       <br />
       <button type="button" id="showText">{da!==""?da:"message..."}</button><br />
+      
+      <div id="type-inside">
+        <button onClick={startListening}>Start</button><br />
+        <button onClick={SpeechRecognition.stopListening}>Stop</button><br />
+      </div>
+      
       <div className="justBTN">
         <button type="submit" id="sendBTN" onClick={send}>
           send
         </button>
       </div>
+
     </div>
   );
 }
