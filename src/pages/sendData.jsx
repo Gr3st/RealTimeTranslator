@@ -29,23 +29,38 @@ export default function SendData() {
   // const la = "en";
  
 
-  const conectionDB = async () =>{
-    const userCollectionRef = collection(firestore, "users");
-    const q = query(userCollectionRef, where("uid", "==", user.uid));
-    const querySnapshot = await getDocs(q);
-    setLang(querySnapshot.docs[0].data().lang);
-  };
-  
-  const conectionTranslatorDB = async () => {
-    const userCollectionRef = collection(firestore, "users");
-    const q = query(userCollectionRef, where("uid", "==", user.uid));
-    const querySnapshot = await getDocs(q);
 
-    const collectionRef = collection(firestore, "Translator");
-    const docRef = doc(collectionRef, querySnapshot.docs[0].data().server);
-    const docSnapshot = await getDoc(docRef);
-    setLangToTranslate(docSnapshot.data().lang);
+  const conectionDB = async () => {
+    try {
+      const userCollectionRef = collection(firestore, "users");
+      const q = query(userCollectionRef, where("uid", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+      setLang(querySnapshot.docs[0].data().lang);
+    } catch (error) {
+      console.error("Error fetching user lang:", error);
+    }
   };
+
+  const conectionTranslatorDB = async () => {
+    try {
+      const userCollectionRef = collection(firestore, "users");
+      const q = query(userCollectionRef, where("uid", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+
+      const collectionRef = collection(firestore, "Translator");
+      const docRef = doc(collectionRef, querySnapshot.docs[0].data().server);
+      const docSnapshot = await getDoc(docRef);
+      setLangToTranslate(docSnapshot.data().lang);
+    } catch (error) {
+      console.error("Error fetching translator lang:", error);
+    }
+  };
+
+  useEffect(() => {
+      conectionDB();
+      conectionTranslatorDB();
+  }, [s]);
+
   const send = async () => {
     
     const userCollectionRef = collection(firestore, "users");
@@ -55,42 +70,44 @@ export default function SendData() {
     const collectionRef = collection(firestore, "Translator");
     const docRef = doc(collectionRef, querySnapshot.docs[0].data().server);
 
-
-    let data = {
-      text: da,
-      lang: querySnapshot.docs[0].data().lang,
-      currentUser: user.uid
-    };
-    try {
-      await setDoc(docRef, data);
-      console.log("Send to ID:", docRef.id);
-      // navigate("/");
-      // window.location.reload();
-    } catch (error) {
-      console.error("Error adding document:", error);
+    if(listening){
+      let data = {
+        text: da,
+        lang: querySnapshot.docs[0].data().lang,
+        currentUser: user.uid
+      };
+      try {
+        await setDoc(docRef, data);
+        console.log("Send to ID:", docRef.id);
+        // navigate("/");
+        // window.location.reload();
+      } catch (error) {
+        console.error("Error adding document:", error);
+      }
     }
-  
   };
   
-
+  
   useEffect(() => {
-    conectionDB();
-    conectionTranslatorDB();
-
+    
+    console.log(s);
     console.log(lang);
     console.log(langToTranslate);
     
     
     if (s !== "" && s.length < 500 && lang!=="" && langToTranslate!=="") {
       Axios.get(
-        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate==lang?lang=="en"?"pl":"en":langToTranslate}`
+        `https://api.mymemory.translated.net/get?q=${s}&langpair=${lang}|${langToTranslate}`
       ).then((res) => {
         setDa(res.data.responseData.translatedText);
         console.log(s.length);
+        send();
       });
+      
     }
-    send();
-  }, [s]);
+    
+    
+  }, [s, lang, langToTranslate]);
   
 
   useEffect(() => {
@@ -98,12 +115,12 @@ export default function SendData() {
   }, [transcript]);
   return (
     <div id="type">
-      {/* <input
+      <input
         type="text" id="setText"
         onChange={(event) => {
           setS(event.target.value);
         }}
-      ></input><br /> */}
+      ></input><br />
    
       
       {/* <input
