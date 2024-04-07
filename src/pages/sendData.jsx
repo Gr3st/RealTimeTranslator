@@ -118,8 +118,9 @@ export default function SendData() {
       <button type="button" id="showText">{da!==""?da:"message..."}</button><br />
       
       <div id="type-inside">
-        <button onClick={startListening}>Start</button><br />
-        <button onClick={SpeechRecognition.stopListening}>Stop</button><br />
+        <input type="text" onChange={(event) => (setS(event.target.value))} ></input>
+        {/* <button onClick={startListening}>Start</button><br />
+        <button onClick={SpeechRecognition.stopListening}>Stop</button><br /> */}
       </div>
       
       {/* <div className="justBTN">

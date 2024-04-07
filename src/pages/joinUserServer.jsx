@@ -8,20 +8,24 @@ import { useNavigate } from "react-router-dom";
 function JoinUserServer (){
     const [join, setJoin] = useState("");
     const [error, setError] = useState(false);
+    const [servlist, setServlist] = useState({});
     // const [lang, setLang] = useState("");
     // const [puser, setPuser] = useState("");
     // const [text, setText] = useState("");
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
-
+    
+    // const listServ= async () => {
+    //   ;
+    // }
     const handleJoin = async () => {
         const collectionRef = collection(firestore, "Translator");
         const docRef = doc(collectionRef, join);
-      
         try {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             const data = docSnap.data();
+           
             // setLang(data.lang);
             // setText(data.text);
             // setPuser(data);
