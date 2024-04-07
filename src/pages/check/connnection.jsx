@@ -68,8 +68,8 @@ function Connection ({ onCheckConnection }) {
       </button>
         {/* Display the document names */}
       <div>
-        <h3>LIST</h3>
-        {documents.map((docName, index) => (
+        <h3>SERVER LIST</h3>
+        {documents?.map((docName, index) => (
           <div key={index}>{docName}</div>
         ))}
       </div>
